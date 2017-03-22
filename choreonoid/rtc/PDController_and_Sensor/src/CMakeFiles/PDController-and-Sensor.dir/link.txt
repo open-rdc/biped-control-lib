@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC    -shared -Wl,-soname,PDController-and-Sensor.so -o PDController-and-Sensor.so CMakeFiles/PDController-and-Sensor.dir/PDController-and-Sensor.cpp.o -lpthread -lomniORB4 -lomnithread -lomniDynamic4 -lRTC -lcoil 
