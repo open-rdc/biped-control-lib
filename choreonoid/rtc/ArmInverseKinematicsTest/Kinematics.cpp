@@ -22,12 +22,12 @@ Matrix<double,3,1> Kinematics::rot2omega(Matrix<double,3,3> R)
 	return 0.5*th/sin(th)*vector_R;
 }
 
-vector<int> Kinematics::FindRoute(int to)
+vector<int> Kinematics::FindRoute(int to, int base)
 {
 	vector<int> idx;
 	int link_num = to;
 
-	while(link_num != 0)
+	while(link_num != base)
 	{
 		idx.push_back(link_num);
 		link_num = ulink[link_num].parent;
@@ -99,7 +99,7 @@ t_matrix Kinematics::PseudoInverse(const t_matrix& m, const double &tolerance)
 	return svd.matrixV()*sigma_inv.asDiagonal()*svd.matrixU().transpose();
 }
 
-bool Kinematics::calcInverseKinematics(int to, Link target)
+bool Kinematics::calcInverseKinematics(int to, int base, Link target)
 {
 	MatrixXd J, dq;
 	Matrix<double,6,1> err;
@@ -111,7 +111,7 @@ bool Kinematics::calcInverseKinematics(int to, Link target)
 	
 	calcForwardKinematics(WAIST);
 	
-	vector<int> idx = FindRoute(to);
+	vector<int> idx = FindRoute(to, base);
 	const int jsize = idx.size();
 	
 	J.resize(6,jsize); dq.resize(jsize,1);
