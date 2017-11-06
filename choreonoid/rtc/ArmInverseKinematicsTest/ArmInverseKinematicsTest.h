@@ -39,8 +39,9 @@ class ArmInverseKinematicsTest
 		OutPort<RTC::TimedDoubleSeq> m_qRefOut;
 	private:
 		Link ulink[JOINT_NUM];
-		Link RARM_Link;
+		Link RARM_Link, LARM_Link;
 		Kinematics *arm;
+		double dist;
 		float gain;
 };
 

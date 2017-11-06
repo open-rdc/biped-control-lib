@@ -22,7 +22,8 @@ ArmInverseKinematicsTest::ArmInverseKinematicsTest(RTC::Manager* manager)
 	m_axesIn("axes", m_axes),
 	m_buttonIn("button", m_button),
 	m_qRefOut("qRef", m_qRef),
-	gain(0.1)
+	gain(0.1),
+	dist(0.5)
 {
 }
 
@@ -61,7 +62,7 @@ RTC::ReturnCode_t ArmInverseKinematicsTest::onActivated(RTC::UniqueId ec_id)
 	arm->calcForwardKinematics(WAIST);
 	
 	RARM_Link = ulink[RARM_JOINT7];
-
+	LARM_Link	= ulink[LARM_JOINT7];
 	return RTC::RTC_OK;
 }
 
@@ -89,12 +90,14 @@ RTC::ReturnCode_t ArmInverseKinematicsTest::onExecute(RTC::UniqueId ec_id)
 			m_qRef.data[36] += 0.001;
 		}
 
-		RARM_Link.p(0) += m_axes.data[1]*0.5;
-		RARM_Link.p(1) += m_axes.data[0]*0.5;
-		RARM_Link.p(2) += m_axes.data[3]*0.5;
+		Eigen::Vector3d refP(-1*m_axes.data[1], -1*m_axes.data[0], m_axes.data[3]);
+		if(m_button.data[4] == 1)
+			LARM_Link.p = LARM_Link.p + (dist*refP);
+		else if(m_button.data[5] == 1)
+			RARM_Link.p = RARM_Link.p + (dist*refP);
 
-		if(arm->calcInverseKinematics(RARM_JOINT7, CHEST_JOINT2, RARM_Link)){
-			for(int i=13;i<=25;i++)
+		if(arm->calcInverseKinematics(RARM_JOINT7, CHEST_JOINT2, RARM_Link) && arm->calcInverseKinematics(LARM_JOINT7, CHEST_JOINT2, LARM_Link)){
+			for(int i=13;i<=33;i++)
 				m_qRef.data[i-1] = ulink[i].q;
 		}else{
 			cerr << "Calculation Inverse Kinematics Faild." << endl;
