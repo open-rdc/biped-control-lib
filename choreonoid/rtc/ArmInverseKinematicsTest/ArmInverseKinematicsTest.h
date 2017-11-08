@@ -27,6 +27,9 @@ class ArmInverseKinematicsTest
 		virtual RTC::ReturnCode_t onActivated(RTC::UniqueId ec_id);
 		virtual RTC::ReturnCode_t onDeactivated(RTC::UniqueId ec_id);
 		virtual RTC::ReturnCode_t onExecute(RTC::UniqueId ec_id);
+
+		bool calcInterpolationPose(std::vector<double> &target_pose);
+		void setBasePose(std::vector<double> base_pose, double goal_time);
 	protected:
 		RTC::TimedDoubleSeq m_qCur;
 		InPort<RTC::TimedDoubleSeq> m_qCurIn;
@@ -41,7 +44,13 @@ class ArmInverseKinematicsTest
 		Link ulink[JOINT_NUM];
 		Link RARM_Link, LARM_Link;
 		Kinematics *arm;
+		std::vector<double> base_pose, dist_pose;
+//		double init_pose_list[21];
+		bool init_pose;
+		int calc_step;
+		double time, goal_time;
 		double dist;
+		double delta_t;
 		float gain;
 };
 
