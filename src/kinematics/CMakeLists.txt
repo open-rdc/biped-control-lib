@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8)
 project(TestKinematics)
 
 find_package(Boost COMPONENTS system thread filesystem)
-find_package(Eigen3 REQUIRED)
+set(EIGEN3_INCLUDE_DIR $ENV{EIGEN3_INCLUDE_DIR} CACHE PATH "Eigen installation dir(Default: $EIGEN_HOME)")
 
 include_directories(
 	${BOOST_INCLUDE_DIRS}

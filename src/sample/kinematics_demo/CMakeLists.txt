@@ -6,7 +6,7 @@ set(DCMAKE_BUILD_TYPE Debug)
 
 find_package(GLUT)
 find_package(OpenGL)
-find_package(Eigen3 REQUIRED)
+set(EIGEN3_INCLUDE_DIR $ENV{EIGEN3_INCLUDE_DIR} CACHE PATH "Eigen installation dir(Default: $EIGEN_HOME)")
 find_package(Boost COMPONENTS system thread filesystem timer)
 
 add_definitions(-lstdc++ -std=c++11)
