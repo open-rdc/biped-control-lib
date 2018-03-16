@@ -1,2 +1,0 @@
-/home/greenwich/Desktop/github/biped-control-lib/src/kinematics/CMakeFiles/demoKinematicsGL.dir
-/home/greenwich/Desktop/github/biped-control-lib/src/kinematics/CMakeFiles/testKinematics.dir

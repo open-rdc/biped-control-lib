@@ -166,14 +166,12 @@ bool Kinematics::calcLMInverseKinematics(int to, Link target)
 		if(Ek2 < 1E-12)
 		{
 			return true;
-			break;
 		}
 		else if( Ek2 < Ek ) Ek = Ek2;
 		else
 		{
 			MoveJoints(idx, -dq);
 			return true;
-			break;
 		}
 	}
 	return false;

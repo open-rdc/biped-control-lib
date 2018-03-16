@@ -14,8 +14,6 @@ int main(int argc, char* argv[])
 	for(int i=0;i<JOINT_NUM;i++)
 		ulink[i].q = 0.0;
 
-	cout << ARM0 << endl;
-
 	ulink[ARM0].q = 0.0;
 	ulink[ARM1].q = deg2rad(-40);
 	ulink[ARM2].q = deg2rad( 80);
@@ -24,7 +22,6 @@ int main(int argc, char* argv[])
 	ulink[ARM5].q = 0.0;
 	//Calculation Forward Kinematics
 	kine.calcForwardKinematics(BASE);
-#if 1
 	Link ARM_LINK = ulink[ARM5];
 	
 	for(int i=0;i<1000;i++){
@@ -39,6 +36,5 @@ int main(int argc, char* argv[])
 		}
 		cout << "\n";
 	}
-#endif
 	return 0;
 }
