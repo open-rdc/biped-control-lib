@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
 	//Calculation Forward Kinematics
 	kine.calcForwardKinematics(BASE);
 	Link ARM_LINK = ulink[ARM5];
-	
+
 	for(int i=0;i<1000;i++){
 		ARM_LINK.p(2) -= 0.001;
 		//Calculation Inverse Kinematics

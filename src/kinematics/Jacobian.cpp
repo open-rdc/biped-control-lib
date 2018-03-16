@@ -34,7 +34,7 @@ Matrix<double,3,1> calcCoM(Link *ulink)
 {
 	double M = calcTotalMass(ulink, BASE);
 	Matrix<double,3,1> MC = calcMC(ulink, BASE); 
-	
+
 	Matrix<double,3,1> com = MC / M;
 
 	return com;
