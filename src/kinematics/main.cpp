@@ -1,6 +1,6 @@
 #include "Kinematics.h"
 #include "Link.h"
-#include "../../util/func.h"
+#include "../util/func.h"
 
 #include <stdlib.h>
 #include <math.h>
@@ -17,7 +17,7 @@ static double pitch = 0.0f;
 static double yaw = 0.0f;
 
 static double angle[6];
-static double initial_angle[6] = {0.0,-30.0,60.0,0.0,-30.0,0.0};
+static double initial_angle[6] = {0.0,-40.0,80.0,0.0,-40.0,0.0};
 
 static GLdouble centerX = 0.0f;
 static GLdouble centerY = 0.0f;
@@ -264,7 +264,7 @@ static void keyboard(unsigned char key, int x, int y)
 	}
 	ARM_Link.R = ik_node->computeMatrixFromAngles(deg2rad(roll), deg2rad(pitch), deg2rad(yaw));
 
-	ik_node->calcInverseKinematics(ARM5, ARM_Link);
+	ik_node->calcLMInverseKinematics(ARM5, ARM_Link);
 	for(int i=0;i<6;i++)
 		angle[i] = rad2deg(ulink[i+1].q);
 }

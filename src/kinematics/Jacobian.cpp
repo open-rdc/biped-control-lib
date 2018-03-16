@@ -32,8 +32,8 @@ double calcTotalMass(Link *ulink, int rootlink)
 // ロボットの重心位置計算
 Matrix<double,3,1> calcCoM(Link *ulink)
 {
-	double M = calcTotalMass(ulink, WAIST);
-	Matrix<double,3,1> MC = calcMC(ulink, WAIST); 
+	double M = calcTotalMass(ulink, BASE);
+	Matrix<double,3,1> MC = calcMC(ulink, BASE); 
 	
 	Matrix<double,3,1> com = MC / M;
 
