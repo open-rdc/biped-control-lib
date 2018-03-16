@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
 		ARM_LINK.p(2) -= 0.001;
 		//Calculation Inverse Kinematics
 		cout << "iteration:" << i << endl;
-		if(kine.calcInverseKinematics(ARM5, ARM_LINK)){
+		if(kine.calcLMInverseKinematics(ARM5, ARM_LINK)){
 			for(int i=1;i<=6;i++)
 				cout << ulink[i].joint_name << ":" << rad2deg(ulink[i].q) << endl;
 		}else{
